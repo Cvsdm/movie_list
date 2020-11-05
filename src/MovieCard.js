@@ -17,7 +17,8 @@ export default class MovieCard extends React.Component {
                 <Card.Body>
                     <Card.Title>{this.props.info.title}</Card.Title>
                     <Card.Subtitle>{this.props.info.release_date.substring(0, 4)}</Card.Subtitle>
-                    <a href={routes.movie + this.props.info.id}>Voir plus</a>
+                    <br/>
+                    <a href={routes.movie + this.props.info.id}>See more</a>
                 </Card.Body>
             </Card>
         )
