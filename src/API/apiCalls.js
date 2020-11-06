@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export async function getList () {
-    return await axios.get(process.env.REACT_APP_API_BASEURL + "discover/movie", { params: { api_key: process.env.REACT_APP_API_KEY } }).then(res => res.data);
+export async function getList (page) {
+    return await axios.get(process.env.REACT_APP_API_BASEURL + "discover/movie", { params: { api_key: process.env.REACT_APP_API_KEY , page: page} }).then(res => res.data);
 }
 
 export async function getMovie(id) {

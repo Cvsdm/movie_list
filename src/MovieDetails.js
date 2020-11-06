@@ -1,6 +1,6 @@
-import React from 'react';
 //import movie from './mockData/movie.json'
-import "./assets/movieDetails.css"
+import React from 'react';
+import "./assets/movie.css"
 import {Container, Row, Image, Col, Button, Table} from "react-bootstrap";
 import routes from "./router/routes";
 import {getMovie} from "./API/apiCalls";
@@ -23,9 +23,6 @@ export default class MovieDetails extends React.Component {
 
         // Get the information from the Api
         getMovie(movieId).then(movie => {
-            console.log(movie)
-
-            //TODO need to add an error case
             this.setState({movie: movie})
         })
     }

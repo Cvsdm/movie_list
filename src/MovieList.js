@@ -2,21 +2,33 @@ import React from 'react';
 import MovieCard from "./MovieCard";
 import {Container, Row, Pagination} from "react-bootstrap";
 import {getList} from "./API/apiCalls";
+import "./assets/movie.css"
 
 export default class MovieList extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {list: null};
+        this.pageChanged = this.pageChanged.bind(this);
     }
 
     componentDidMount() {
-        getList().then(movies => {
-            console.log(movies)
-            //TODO need to add an error case
+        getList(1).then(movies => {
             this.setState({list: movies, active: 1})
         })
 
+    }
+
+    pageChanged(e) {
+        this.setState({
+            active: parseInt(e.target.text)
+        })
+
+        getList(e.target.text).then(movies => {
+            //TODO need to add an error case
+            this.setState({list: movies})
+            window.scrollTo(0, 0)
+        })
     }
 
     pagination() {
@@ -34,9 +46,9 @@ export default class MovieList extends React.Component {
             );
             displayedNumber++
         }
-        console.log(pages);
+
         return (
-            <Pagination variant="danger">
+            <Pagination onClick={this.pageChanged}>
                 <Pagination.First/>
                 <Pagination.Prev/>
                 {pages}
@@ -50,7 +62,7 @@ export default class MovieList extends React.Component {
     render() {
         if (this.state.list != null) {
             return (
-                <Container fluid >
+                <Container fluid>
                     <br/>
                     <Row className="justify-content-md-center">
                         <h1>Tending Movies this Week </h1>
